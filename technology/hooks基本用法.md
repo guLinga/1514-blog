@@ -74,7 +74,7 @@ const App = ()=>{
 }
 export default App;
 ```
-### useSyncExternalStore(不太会)
+### useSyncExternalStore
 ```
 useSyncExternalStore(
     subscribe,
@@ -398,7 +398,7 @@ const App = ()=>{
 
 export default App;
 ```
-### useImperativeHandle(不太会)
+### useImperativeHandle
 对于子组件，如果是 class 类组件，我们可以通过 ref 获取类组件的实例，但是在子组件是函数组件的情况，如果我们就需要useImperativeHandle和forwardRef配合来实现。
 ```
 useImperativeHandle(ref,createHandle,deps)
@@ -511,3 +511,10 @@ export default App;
 在开发者工具中的这个hooks旁边会显示标签。
 ![hooks-1](../image/hooks-1.png)
 ### useId
+useId用来生成唯一id。
+```
+function Demo (){
+   const rid = useId() // 生成稳定的 id 
+   return <div id={rid} ></div>
+}
+```
