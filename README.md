@@ -9,6 +9,12 @@
 
 [4. hooks基本用法](./technology/hooks%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95.md)-2022.08.31
 
+[5. 同步和异步]
+
+[6. redux]
+
+[7. 宏任务和微任务]
+
 ## [算法总结](./arithmetic/index.md)
 
 ## [BUG总结](./bug/index.md)

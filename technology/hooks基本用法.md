@@ -1,9 +1,38 @@
 [<=返回](./index.md)
 <hr/>
 
+[React Hooks简单用法了解](#1)
++ [hooks数据更新驱动](#2)
+  - [useState](#3)
+  - [useReducer](#4)
+  - [useSyncExternalStore](#5)
+  - [useTransition](#6)
+  - [useDeferredValue](#7)
++ [hooks执行副作用](#8)
+  - [useEffect](#9)
+  - [useLayoutEffect](#10)
+  - [useInsertionEffect](#11)
++ [hooks状态获取与传递](#12)
+  - [useContext](#13)
+  - [useRef](#14)
+  - [useImperativeHandle](#15)
++ [hooks状态派生与保存](#16)
+  - [useMemo](#17)
+  - [useCallback](#18)
++ [hooks工具hooks](#19)
+  - [useDebugValue](#20)
+  - [useId](#21)
+
+<p id=1></p>
+
 # React Hooks简单用法了解
 
+<p id=2></p>
+
 ## hooks数据更新驱动
+
+<p id=3></p>
+
 ### useState
 ```
 const [state, dispatch] = useState(initData);
@@ -42,6 +71,9 @@ const App = ()=>{
 export default App;
 ```
 3. dispatch在当前执行上下文中获取不到最新的state,只有在下一组件render中才能获取到。
+
+<p id=4></p>
+
 ### useReducer
 ```
 const [state, dispatch] = useReducer(reducer);
@@ -74,6 +106,9 @@ const App = ()=>{
 }
 export default App;
 ```
+
+<p id=5></p>
+
 ### useSyncExternalStore
 ```
 useSyncExternalStore(
@@ -109,6 +144,9 @@ const App = ()=>{
 }
 export default App;
 ```
+
+<p id=6></p>
+
 ### useTransition 
 ```
 const  [ isPending , startTransition ] = useTransition ()
@@ -150,6 +188,9 @@ const App = ()=>{
 }
 export default App;
 ```
+
+<p id=7></p>
+
 ### useDeferredValue
 useDeferredValue和useTransition类似。它两个本质上和内部实现一样都是标记成了过渡更新任务。
 useTransition是把其内部的更新任务变成了过渡任务transtion，而useDeferredValue是把原值通过过渡任务得到新的值，这个值作为延时状态。一个是处理一段逻辑，一个是产生一个新的状态。
@@ -191,7 +232,13 @@ const App = ()=>{
 
 export default App;
 ```
+
+<p id=8></p>
+
 ## hooks执行副作用
+
+<p id=9></p>
+
 ### useEffect
 useEffect、useLayoutEffect、useInsertionEffect弥补了函数组件没有生命周期的缺陷。其中最常用的就是 useEffect。
 ```
@@ -233,6 +280,9 @@ useEffect 中做的功能如下：
 3. 操作 dom , 在 React Native 中可以通过 ref 获取元素位置信息等内容。
 4. 注册事件监听器, 事件绑定，在 React Native 中可以注册 NativeEventEmitter 。
 5. 还可以清除定时器，延时器，解绑事件监听器等。
+
+<p id=10></p>
+
 ### useLayoutEffect
 useLayoutEffect和useEffect的区别
 1. useLayoutEffect是同步的，useEffect是异步的。
@@ -293,6 +343,9 @@ export default App;
 5. 虚拟DOM设置到真实DOM上
 6. 渲染
 上面的代码只渲染了一次，不会出现页面闪动。
+
+<p id=11></p>
+
 ### useInsertionEffect(一般不使用)
 1. useInsertionEffect比useLayoutEffect和useEffect的执行都要靠前。
 2. useInsertionEffect执行的时候，DOM还没有更新。
@@ -317,7 +370,13 @@ const App = ()=>{
 
 export default App;
 ```
+
+<p id=12></p>
+
 ## hooks状态获取与传递
+
+<p id=13></p>
+
 ### useContext
 可以使用useContext接收父组件传过来的参数，也可以使用Context.Consumer接收父组件传过来的参数。
 > Demo
@@ -357,6 +416,9 @@ export const Children2 = ()=>{
   </CountContext.Consumer>
 }
 ```
+
+<p id=14></p>
+
 ### useRef
 useRef可以用来获取DOM元素，缓存状态，在React Native中虽然没有 DOM 元素，但是也能够获取组件的节点信息。
 ```
@@ -398,6 +460,9 @@ const App = ()=>{
 
 export default App;
 ```
+
+<p id=15></p>
+
 ### useImperativeHandle
 对于子组件，如果是 class 类组件，我们可以通过 ref 获取类组件的实例，但是在子组件是函数组件的情况，如果我们就需要useImperativeHandle和forwardRef配合来实现。
 ```
@@ -406,7 +471,13 @@ useImperativeHandle(ref,createHandle,deps)
 1. 第一个参数ref是接收forWardRef传过来的ref。
 2. 第二个参数createHandle是处理函数，返回值作为暴露给父组件的 ref 对象。
 3. 第三个参数deps是依赖项，依赖项更改形成新的 ref 对象。
+
+<p id=16></p>
+
 ## hooks状态派生与保存
+
+<p id=17></p>
+
 ### useMemo
 useMemo 可以在函数组件 render 上下文中同步执行一个函数逻辑，这个函数的返回值可以作为一个新的状态缓存起来。
 ```
@@ -445,7 +516,9 @@ export const Son = (props:{msg:{name:string,age:number}})=>{
 }
 export default App;
 ```
-> Demo
+
+<p id=18></p>
+
 ### useCallback
 useMemo 和 useCallback 接收的参数都是一样，区别在于 useMemo 返回的是函数运行的结果，useCallback 返回的是函数。
 > Demo
@@ -482,7 +555,13 @@ const Page = (props) => {
     )
 }
 ```
+
+<p id=19></p>
+
 ## hooks工具hooks
+
+<p id=20></p>
+
 ### useDebugValue
 ```
 import React, { useDebugValue, useEffect, useState } from "react";
@@ -510,6 +589,9 @@ export default App;
 ```
 在开发者工具中的这个hooks旁边会显示标签。
 ![hooks-1](../image/hooks-1.png)
+
+<p id=21></p>
+
 ### useId
 useId用来生成唯一id。
 ```
