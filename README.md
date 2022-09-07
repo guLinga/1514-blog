@@ -9,13 +9,17 @@
 
 [4. hooks基本用法](./technology/hooks%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95.md)-2022.08.31
 
-[5. 同步和异步]
+[5. react-redux基础了解](./technology/redux.md)
 
-[6. redux]
+[6. 同步和异步]
 
 [7. 宏任务和微任务]
 
+[8. 闭包]
+
 ## [算法总结](./arithmetic/index.md)
+
+## [刷题总结](./exercise/index.md)
 
 ## [BUG总结](./bug/index.md)
 
