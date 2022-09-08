@@ -21,7 +21,7 @@
 
 ## [刷题总结](./exercise/index.md)
 
-[1. JavaScript](./exercise/JavaScript/index.md)-2022.09.08
+[1. JavaScript](./exercise/JavaScript/index.md)
 
 ## [BUG总结](./bug/index.md)
 
