@@ -133,15 +133,315 @@ import { store, add } from './store';//引入store和actios
 store.dispatch(add());
 //调用getState方法获取state的值
 ```
-#### redux-logger
-#### redux-saga
 #### Redux中间件及异步操作
-applyMiddleware
+1. 对于redux而言，同步就是当视图发出action后，reducer立即计算出state，异步是指当action发出后，需要等待结果计算完成，也就是一段时间再执行reducer。
+2. 同步通常再原生的redux工作流程中，而大多数场景更多需要异步操作，例如ajax请求后拿到数据后再进入reducer执行计算并对state进行更新。
+3. Redux显然是不支持异步操作的，这就要用到中间件来处理这种业务了。中间件就是对store.dispatch方法进行拓展。
+我们可以使用redux-logger来查看dispatch改变状态时打印出来的旧状态、当前触发的action和新状态。也可以使用redux-saga来调用异步接口
+> 使用redux-actions修改src/store/index.ts文件代码
+```
+import { createStore, applyMiddleware } from 'redux' //引入
+import { ActionFunctionAny, createAction } from 'redux-actions'
+import logger  from 'redux-logger'
+import createSagaMiddleware from 'redux-saga';
+const sagaMiddleware = createSagaMiddleware(); // 调用异步接口
+//创建reducers
+export interface IAction{
+  type: string,
+  [index:string]:any
+}
+export interface IInitCountState{
+  count: number
+}
+const reducers = (state = {count: 0}, action:IAction):IInitCountState => {
+  switch(action.type){
+    case 'Add': return {count: state.count + 1};
+    case 'Sub': return {count: state.count - 1};
+    default: 
+      return {count: state.count};
+  }
+}
+//创建actions
+export const Add = 'Add';
+export const add:ActionFunctionAny<{type: string}> = createAction(Add)
+let middleware = [logger, sagaMiddleware]
+//创建store
+export const store = createStore(
+  reducers,
+  applyMiddleware(...middleware)
+);
+```
+redux-logger在控制台输出如下：
+![redux-logger在控制台的输出](../image/Redux/2.png)
 ### react-redux
 ### react-router与Redux的结合
 ### Redux Toolkit
 Redux Toolkit是Redux官方推荐的编写Redux逻辑的方法。
+学习Redux Toolkit推荐到[Redux官网](https://cn.redux.js.org/)看官网的教程
+#### 安装扩展
+1. React DevTools
+2. Redux DevTools Extension
+可以在[extfans](https://www.extfans.com/)上搜索对应的扩展。
+#### store创建
+> store/index.js
+```
+import { configureStore } from '@reduxjs/toolkit'//引入toolkit
+import postsReducer from '../features/posts/postSlice'//引入的reducer函数，在下面会介绍到
+export default configureStore({
+  reducer: {
+    posts: postsReducer
+  }
+})
+```
+我们可以通过Redux DevTools Extension来查看state的结构
+![store结构](../image/Redux/)
+#### 创建reducers
+> features/posts/postSlice.js
+```
+import { createSlice } from '@reduxjs/toolkit'
+const initialState = {
+  posts: [
+    { title: 'First Post!' },
+    { title: 'Second Post' }
+  ],
+  status: 'idle',
+  error: null
+}
+const postsSlice = createSlice({
+  name: 'posts',
+  initialState,
+  reducers: {
+    postAdded(state, action){
+      state.posts.push({ title: action.payload })
+    }
+  }
+})
+export default postsSlice.reducer
+```
+#### 绑定state
+> index.tsx
+使用Provider标签将store绑定到全局
+```
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import { App } from './App'
+import store from './app/store'
+import { Provider } from 'react-redux'
+// Wrap app rendering so we can wait for the mock API to initialize
+async function start() {
+  ReactDOM.render(
+    <React.StrictMode>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </React.StrictMode>,
+    document.getElementById('root')
+  )
+}
+start()
+```
+#### 获取state数据
+> App.js
+```
+import React from "react";
+import { useSelector } from "react-redux";
 
+export const App = () => {
+  const posts = useSelector(state => state.posts);
+  console.log(posts);
+  return <div></div>
+}
+```
+控制台可以看到输出的结果
+![state获取结果](../image/Redux/4.png)
+#### dispatch
+> App.js
+```
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { postAdded } from "./features/posts/postSlice";
 
+export const App = () => {
+  const dispatch = useDispatch();
+  const posts = useSelector(state => state.posts);
+  const add = () => {
+    dispatch(postAdded('three'));
+    console.log(posts);
+  }
+  return <div onClick={add}>+</div>
+}
+```
+当我们点击“+”的时候，Redux DevTools Extension左侧会输出**posts/postAdded**，右侧的state树会变化。
+![dispatch](../image/Redux/5.png)
+#### reducer中的prepare
+我们可以使用prepare来接收参数，将参数转换成一定形式再传递给reducer对应的函数。
+我们可以将features/posts/postSlice.js使用prepare来修改。
+> features/posts/postSlice.js
+```
+import { createSlice } from '@reduxjs/toolkit'
+const initialState = {
+  posts: [
+    { title: 'First Post!' },
+    { title: 'Second Post' }
+  ],
+  status: 'idle',
+  error: null
+}
+const postsSlice = createSlice({
+  name: 'posts',
+  initialState,
+  reducers: {
+    postAdded:{
+      reducer(state, action) {
+        state.posts.push(action.payload)
+      },
+      prepare(title){
+        return {
+          payload: {
+            title,
+            content: '我是内容'
+          }
+        }
+      }
+    },
+  }
+})
+export const { postAdded } = postsSlice.actions
+export default postsSlice.reducer
+```
+#### createAsynThunk异步调用
+> features/posts/postSlice.js
+```
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import axios from 'axios'
+const initialState = {
+  posts: [
+    { title: 'First Post!' },
+    { title: 'Second Post' }
+  ],
+  status: 'idle',
+  error: null
+}
+export const fetchPosts = createAsyncThunk('posts/fetchPosts',async()=>{
+  //这里写axios请求
+  const response = await axios({
+    url: 'https://github.com/search?q=1514-blog'
+  })
+  return response;
+})
+const postsSlice = createSlice({
+  name: 'posts',
+  initialState,
+  reducers: {
+    postAdded:{
+      reducer(state, action) {
+        state.posts.push(action.payload)
+      },
+      prepare(title){
+        return {
+          payload: {
+            title,
+            content: '我是内容'
+          }
+        }
+      }
+    },
+  },
+  extraReducers(builder){
+    builder
+    .addCase(fetchPosts.pending, (state, action) => {
+      console.log('loading',state, action);
+      state.status = 'loading';
+    })
+    .addCase(fetchPosts.fulfilled, (state, action) => {
+      console.log('succeeded',state, action);
+      state.status = 'succeeded';
+      state.posts = state.posts.concat(action.payload);
+    })
+    .addCase(fetchPosts.rejected, (state, action) => {
+      console.log('failed',state, action);
+      state.status = 'failed';
+      state.error = action.error.message;
+    })
+  }
+})
+export const { postAdded } = postsSlice.actions
+export default postsSlice.reducer
+```
+> App.js
+```
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { postAdded, fetchPosts } from "./features/posts/postSlice";
 
+export const App = () => {
+  const dispatch = useDispatch();
+  const posts = useSelector(state => state.posts);
+  const add = () => {
+    dispatch(postAdded('three'));
+    dispatch(fetchPosts());
+    console.log(posts);
+  }
+  return <div onClick={add}>+</div>
+}
+```
+其中extraReducers还有另一种写法
+> features/posts/postSlice.js
+```
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import axios from 'axios'
+const initialState = {
+  posts: [
+    { title: 'First Post!' },
+    { title: 'Second Post' }
+  ],
+  status: 'idle',
+  error: null
+}
+export const fetchPosts = createAsyncThunk('posts/fetchPosts',async()=>{
+  //这里写axios请求
+  const response = await axios({
+    url: 'https://github.com/search?q=1514-blog'
+  })
+  return response;
+})
+const postsSlice = createSlice({
+  name: 'posts',
+  initialState,
+  reducers: {
+    postAdded:{
+      reducer(state, action) {
+        state.posts.push(action.payload)
+      },
+      prepare(title){
+        return {
+          payload: {
+            title,
+            content: '我是内容'
+          }
+        }
+      }
+    },
+  },
+  extraReducers: {
+    [fetchPosts.pending]: (state, action) => {
+      console.log('loading',state, action);
+      state.status = 'loading';
+    },
+    [fetchPosts.fulfilled]: (state, action) => {
+      console.log('succeeded',state, action);
+      state.status = 'succeeded';
+      state.posts = state.posts.concat(action.payload);
+    },
+    [fetchPosts.rejected]: (state, action) => {
+      console.log('failed',state, action);
+      state.status = 'failed';
+      state.error = action.error.message;
+    }
+  }
+})
+export const { postAdded } = postsSlice.actions
+export default postsSlice.reducer
+```
 
