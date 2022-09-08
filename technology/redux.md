@@ -1,4 +1,4 @@
-## Redux、redux-actions、redux-logger、redux-saga、react-redux、Redux Toolkit
+## Redux、Redux Toolkit
 
 ### Redux
 React中的问题：在React中，整个React没有数据向上回溯的能力，这就是React的单向数据流。这意味着如果一个数据状态复杂的应用，React可能根本无法让两个组件互相传递数据。
@@ -173,8 +173,6 @@ export const store = createStore(
 ```
 redux-logger在控制台输出如下：
 ![redux-logger在控制台的输出](../image/Redux/2.png)
-### react-redux
-### react-router与Redux的结合
 ### Redux Toolkit
 Redux Toolkit是Redux官方推荐的编写Redux逻辑的方法。
 学习Redux Toolkit推荐到[Redux官网](https://cn.redux.js.org/)看官网的教程
