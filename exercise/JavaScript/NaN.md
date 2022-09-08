@@ -1,0 +1,33 @@
+[<=返回](./index.md)
+<hr/>
+
+题目：
+```
+console.log(NaN == NaN)
+console.log(NaN === NaN)
+console.log(Object.is(NaN, NaN))
+console.log([NaN].indexOf(NaN))
+console.log([NaN].includes(NaN))
+console.log(Math.max(NaN, 1))
+console.log(Math.min(NaN, 1))
+console.log(Math.min(NaN, Infinity))
+```
+
+答案：
+```
+false
+false
+true
+-1
+true
+NaN
+NaN
+NaN
+```
+
+解析：
+1. NaN不等于任何数，并且不等于自身，使用==和===返回false
+2. 判断NaN的方法：Object.isNaN()、Object.is(NaN, NaN)
+3. Array.indexOf(val)返回数组中第一个和val相等的值的下标，如果没有则返回-1，不能用来判断NaN
+4. Array.includs(val)返回数组中是否包含某个值，可以用来判断NaN
+5. NaN是not a number，NaN和数字进行计算都返回NaN
