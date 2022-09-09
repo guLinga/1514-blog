@@ -1,0 +1,22 @@
+[<=返回](./index.md)
+<hr/>
+
+题目：
+```
+console.log(Reflect.ownKeys([]))
+console.log(Reflect.ownKeys([,]))
+console.log(Reflect.ownKeys([1,,2]))
+console.log(Reflect.ownKeys([...[1,,2]]))
+```
+
+答案：
+```
+["length"]
+["length"]
+["0","2","length"]
+["0","1","2","length"]
+```
+
+解析：
+1. 关于Reflect.ownKeys在[对象遍历方法](../../technology/%E5%AF%B9%E8%B1%A1%E9%81%8D%E5%8E%86%E6%96%B9%E6%B3%95.md)中有讲过，就是遍历对象中的自身所有的可枚举和不可枚举的字符串和Symbol类型。但是无法遍历原型上面的。
+2. 展开运算符在展开数组时候，如果元素为空则转换成undefined。
