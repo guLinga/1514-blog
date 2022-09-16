@@ -34,14 +34,14 @@
 <p id=3></p>
 
 ### useState
-```
+```tsx
 const [state, dispatch] = useState(initData);
 ```
 1. state是一个值，可以交给render来渲染。
 2. dispatch是改变state的函数。
 3. initData是state值得初始化值，可以是一个值也可以是一个函数，如果是一个函数则state的初始化值就是函数的返回值。
 > Demo
-```
+```tsx
 import React, { useState } from 'react';
 const App = ()=>{
   const [num, setNum] = useState(0);
@@ -57,7 +57,7 @@ export default App;
 注意点：
 1. 在函数组件的一次上下文中，state的值是固定不变的，及时你使用dispatch对state进行修改，在视图中state改变，但是打印的state还是没有改变。
 2. 如果dispatch传入的值state的值不变或地址值不变，则组件不会更新。
-```
+```tsx
 import React, { useState } from 'react';
 const App = ()=>{
   const [num, setNum] = useState({name: 'name'});
@@ -75,14 +75,14 @@ export default App;
 <p id=4></p>
 
 ### useReducer
-```
+```tsx
 const [state, dispatch] = useReducer(reducer);
 ```
 1. state
 2. dispatch和useState中的dispatch是一样的。
 3. reducer是一个函数，接收两个参数，state和action，state是之前的state值，action是传入的值，如果state和action相同，则组件不会更新。
 > Demo
-```
+```tsx
 import React, { useReducer } from 'react';
 const App = ()=>{
   const [num, setNum] = useReducer((state:number, action:{name:'add'|'sub'|'reset'; payload:number})=>{
@@ -110,7 +110,7 @@ export default App;
 <p id=5></p>
 
 ### useSyncExternalStore
-```
+```tsx
 useSyncExternalStore(
     subscribe,
     getSnapshot,
@@ -120,7 +120,7 @@ useSyncExternalStore(
 1. subscribe为订阅函数，当数据改变的时候会触发subscribe，useSyncExternalStore会通过带有记忆性的getSnapshot来判断数据是否发生变化，如果发生变化则会强制更新数据
 2. getSnapshot 可以理解成一个带有记忆功能的选择器。当 store 变化的时候，会通过 getSnapshot 生成新的状态值，这个状态值可提供给组件作为数据源使用，getSnapshot 可以检查订阅的值是否改变，改变的话那么会触发更新。
 3. getServerSnapshot 用于 hydration 模式下的 getSnapshot。
-```
+```tsx
 import React, { useReducer, useState, useSyncExternalStore } from 'react';
 import {combineReducers, createStore} from 'redux'
 function numberReducer(state=1,action:any){
@@ -148,13 +148,13 @@ export default App;
 <p id=6></p>
 
 ### useTransition 
-```
+```tsx
 const  [ isPending , startTransition ] = useTransition ()
 ```
 1. isPending是出于过度状态的标志。
 2. startTransition可以把更新任务变成过渡任务。
 > Demo
-```
+```tsx
 import React, { useState, useTransition } from 'react';
 /* 模拟数据 */
 const mockList1 = new Array(10000).fill('tab1').map((item,index)=>item+'--'+index )
@@ -194,13 +194,13 @@ export default App;
 ### useDeferredValue
 useDeferredValue和useTransition类似。它两个本质上和内部实现一样都是标记成了过渡更新任务。
 useTransition是把其内部的更新任务变成了过渡任务transtion，而useDeferredValue是把原值通过过渡任务得到新的值，这个值作为延时状态。一个是处理一段逻辑，一个是产生一个新的状态。
-```
+```tsx
 const deferrredValue = React.useDeferredValue(value)
 ```
 1. value一般为可变的state
 2. deferrredValue是返回的延时状态
 > Demo 将useTransition的例子用useDeferredValue实现
-```
+```tsx
 import React, { useDeferredValue, useState } from 'react';
 import './index.css'
 /* 模拟数据 */
@@ -241,7 +241,7 @@ export default App;
 
 ### useEffect
 useEffect、useLayoutEffect、useInsertionEffect弥补了函数组件没有生命周期的缺陷。其中最常用的就是 useEffect。
-```
+```tsx
 useEffect(()=>{
     return destory
 },dep)
@@ -250,7 +250,7 @@ useEffect(()=>{
 2. dep是依赖项，是一个数组，可以有多个依赖项。当dep发生改变，执行上一次callback返回的destory，和执行新的effect第一个参数callback。
 对于 useEffect 执行， React 处理逻辑是采用异步调用 ，对于每一个 effect 的 callback， React 会向 setTimeout回调函数一样，放入任务队列，等到主线程任务完成，DOM 更新，js 执行完成，视图绘制完毕，才执行。所以 effect 回调函数不会阻塞浏览器绘制视图。
 > Demo
-```
+```tsx
 import React, { useEffect } from "react";
 //模仿请求数据
 function msg(){
@@ -289,7 +289,7 @@ useLayoutEffect和useEffect的区别
 2. useLayoutEffect是在DOM更新之后，浏览器绘制之前。useEffect是在DOM更新之后，浏览器绘制之后。所以如果要修改DOM可以在useLayoutEffect中，这样避免了在useEffect中，绘制过后再次绘制。
 3. useLayoutEffect callback 中代码执行会阻塞浏览器绘制。
 因为useLayoutEffect是在DOM结构更新后，渲染前执行，所以相当于有一个防抖效果。
-```
+```tsx
 import React, { useEffect, useState } from "react";
 
 const App = ()=>{
@@ -317,7 +317,7 @@ export default App;
 7. 渲染
 因为在很短的时间内渲染了两次，所以导致页面会出现闪动。
 我们可以用useLayoutEffect改进。
-```
+```tsx
 import React, { useLayoutEffect, useState } from "react";
 
 const App = ()=>{
@@ -351,7 +351,7 @@ export default App;
 2. useInsertionEffect执行的时候，DOM还没有更新。
 3. useInsertionEffect主要解决css-in-js在渲染中注入样式的性能问题。
 > Demo
-```
+```tsx
 import React, { useInsertionEffect } from "react";
 
 const App = ()=>{
@@ -380,7 +380,7 @@ export default App;
 ### useContext
 可以使用useContext接收父组件传过来的参数，也可以使用Context.Consumer接收父组件传过来的参数。
 > Demo
-```
+```tsx
 //App.tsx文件
 import React, { createContext, useContext, useState } from "react";
 import { Children2 } from "./components/children";
@@ -428,7 +428,7 @@ console.log(cur.current)
 1. cur上有一个current就是ref对象需要获取的内容。
 2. initState是初始化值。
 > Demo
-```
+```tsx
 import React, { useRef } from "react";
 const App = ()=>{
   const dom = useRef(null);
@@ -444,7 +444,7 @@ export default App;
 ```
 useRef 保存状态， 可以利用 useRef 返回的 ref 对象来保存状态，只要当前组件不被销毁，那么状态就会一直存在。
 > Demo
-```
+```tsx
 import React, { useRef } from "react";
 
 const App = ()=>{
@@ -465,7 +465,7 @@ export default App;
 
 ### useImperativeHandle
 对于子组件，如果是 class 类组件，我们可以通过 ref 获取类组件的实例，但是在子组件是函数组件的情况，如果我们就需要useImperativeHandle和forwardRef配合来实现。
-```
+```tsx
 useImperativeHandle(ref,createHandle,deps)
 ```
 1. 第一个参数ref是接收forWardRef传过来的ref。
@@ -480,7 +480,7 @@ useImperativeHandle(ref,createHandle,deps)
 
 ### useMemo
 useMemo 可以在函数组件 render 上下文中同步执行一个函数逻辑，这个函数的返回值可以作为一个新的状态缓存起来。
-```
+```tsx
 const cacheSomething = useMemo(create,deps)
 ```
 1. create是一个函数，函数的返回值作为缓存值，缓存起来。
@@ -488,7 +488,7 @@ const cacheSomething = useMemo(create,deps)
 3. cacheSomething执行create的返回值。如果deps中有依赖项改变，返回的重新执行create产生的值，否则取上一次缓存值。
 > Demo
 当持续点击一个按钮，只会输出“组件更新了”，当两个按钮切换着点击才会显示useMemo改变了。
-```
+```tsx
 import React, { useEffect, useMemo, useState } from "react";
 
 const App = ()=>{
@@ -522,7 +522,7 @@ export default App;
 ### useCallback
 useMemo 和 useCallback 接收的参数都是一样，区别在于 useMemo 返回的是函数运行的结果，useCallback 返回的是函数。
 > Demo
-```
+```tsx
 //子组件会有不必要渲染的例子
 interface ChildProps {
     name: { name: string; color: string };
@@ -563,7 +563,7 @@ const Page = (props) => {
 <p id=20></p>
 
 ### useDebugValue
-```
+```tsx
 import React, { useDebugValue, useEffect, useState } from "react";
 
 const App = ()=>{
@@ -594,7 +594,7 @@ export default App;
 
 ### useId
 useId用来生成唯一id。
-```
+```tsx
 function Demo (){
    const rid = useId() // 生成稳定的 id 
    return <div id={rid} ></div>

@@ -47,7 +47,7 @@ React问题解决：Redux就是把所有的state集中到组件顶部，能够�
 npx create-react-app jira --template typescript
 ```
 > src/store/index.ts文件中写如下代码创建全局的state
-```
+```ts
 //npm i redux 安装redux
 import { createStore } from 'redux' //引入
 type Type = 'Add' | 'Sub';
@@ -70,7 +70,7 @@ export const actions:{
 export const store = createStore(reducers);
 ```
 > APP.tsx文件中执行如下代码 控制台输出结果是{count: 1}
-```
+```tsx
 import { store, actions } from './store';//引入store和actios
 //使用store中的dispatch触发actions，让actions被对应的reducer调用
 store.dispatch(actions.add());
@@ -90,7 +90,7 @@ Redux中的流程图如下图所示
 #### Redux中的不可变性
 什么是不可变性呢？我们看以下的例子。
 我创建一个对象和数组，我可以通过访问对象和数组来改变其中的值。
-```
+```js
 const obj = { a: 1, b: 2 }
 obj.b = 3//对象仍然还是那个对象，但它的内容已经变了
 const arr = ['a', 'b']
@@ -101,7 +101,7 @@ arr[1] = 'd'//数组仍然还是那个数组，但它的内容已经变了
 浅拷贝就是拷贝了地址值，让拷贝体指向本体的地址，这样拷贝体仍然是本体。显然我们要使用的是深拷贝。我们可以使用js中的展开运算符，和数组的concat方法或slice方法。
 1. 对于js中的展开运算符只是深拷贝了对象或数组的第一层，所以如果我们想要修改深层的对象，我们需要对每一层都使用展开运算符。
 2. concat是深拷贝数组。
-```
+```js
 const obj = {
   a: {
     // 为了安全的更新 obj.a.c，需要先复制一份
@@ -133,7 +133,7 @@ arr3.push('c')
 npm i redux-actions
 ```
 redux-actions让Redux状态管理更加简单，该库提供的createAction方法用于创建actions
-```
+```tsx
 import { createAction } from "redux-actions"
 export const INCREMENT = 'INCREMENT'
 export const increment = createAction(INCREMENT)
@@ -141,7 +141,7 @@ increment()//{ type: 'INCREMENT' }
 increment(10)//{ type: 'INCREMENT', payload: 10 }
 ```
 > 使用redux-actions修改src/store/index.ts文件代码
-```
+```tsx
 import { createStore } from 'redux' //引入
 import { ActionFunctionAny, createAction } from 'redux-actions'
 //创建reducers
@@ -167,7 +167,7 @@ export const add:ActionFunctionAny<{type: string}> = createAction(Add)
 export const store = createStore(reducers);
 ```
 > 使用redux-actions修改APP.tsx文件中的代码 控制台输出结果是{count: 1}
-```
+```tsx
 import { store, add } from './store';//引入store和actios
 //使用store中的dispatch触发actions，让actions被对应的reducer调用
 store.dispatch(add());
@@ -182,7 +182,7 @@ store.dispatch(add());
 3. Redux显然是不支持异步操作的，这就要用到中间件来处理这种业务了。中间件就是对store.dispatch方法进行拓展。
 我们可以使用redux-logger来查看dispatch改变状态时打印出来的旧状态、当前触发的action和新状态。也可以使用redux-saga来调用异步接口
 > 使用redux-actions修改src/store/index.ts文件代码
-```
+```tsx
 import { createStore, applyMiddleware } from 'redux' //引入
 import { ActionFunctionAny, createAction } from 'redux-actions'
 import logger  from 'redux-logger'
@@ -234,7 +234,7 @@ Redux Toolkit是Redux官方推荐的编写Redux逻辑的方法。
 
 #### store创建
 > store/index.js
-```
+```tsx
 import { configureStore } from '@reduxjs/toolkit'//引入toolkit
 import postsReducer from '../features/posts/postSlice'//引入的reducer函数，在下面会介绍到
 export default configureStore({
@@ -250,7 +250,7 @@ export default configureStore({
 
 #### 创建reducers
 > features/posts/postSlice.js
-```
+```tsx
 import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   posts: [
@@ -277,7 +277,7 @@ export default postsSlice.reducer
 #### 绑定state
 > index.tsx
 使用Provider标签将store绑定到全局
-```
+```tsx
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
@@ -302,7 +302,7 @@ start()
 
 #### 获取state数据
 > App.js
-```
+```tsx
 import React from "react";
 import { useSelector } from "react-redux";
 
@@ -319,7 +319,7 @@ export const App = () => {
 
 #### dispatch
 > App.js
-```
+```tsx
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postAdded } from "./features/posts/postSlice";
@@ -343,7 +343,7 @@ export const App = () => {
 我们可以使用prepare来接收参数，将参数转换成一定形式再传递给reducer对应的函数。
 我们可以将features/posts/postSlice.js使用prepare来修改。
 > features/posts/postSlice.js
-```
+```tsx
 import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   posts: [
@@ -380,7 +380,7 @@ export default postsSlice.reducer
 
 #### createAsynThunk异步调用
 > features/posts/postSlice.js
-```
+```tsx
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 const initialState = {
@@ -438,7 +438,7 @@ export const { postAdded } = postsSlice.actions
 export default postsSlice.reducer
 ```
 > App.js
-```
+```tsx
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postAdded, fetchPosts } from "./features/posts/postSlice";
@@ -456,7 +456,7 @@ export const App = () => {
 ```
 其中extraReducers还有另一种写法
 > features/posts/postSlice.js
-```
+```tsx
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 const initialState = {
