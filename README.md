@@ -11,11 +11,8 @@
 
 [5. react-redux基础了解](./technology/redux.md)-2022.09.08
 
-[6. 同步和异步]
+[6. 执行上下文](./technology/%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87.md)-2022.09.17
 
-[7. 宏任务和微任务]
-
-[8. 闭包]
 
 ## [算法总结](./arithmetic/index.md)
 
