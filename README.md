@@ -13,6 +13,7 @@
 
 [6. 执行上下文](./technology/%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87.md)-2022.09.17
 
+[7. JS事件循环机制event loop](./technology/JS%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6event%20loop.md)-2022.09.18
 
 ## [算法总结](./arithmetic/index.md)
 
