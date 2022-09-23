@@ -15,6 +15,8 @@
 
 [7. JS事件循环机制event loop](./technology/JS%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6event%20loop.md)-2022.09.18
 
+[8. css优先级计算规则](./technology/css%E4%BC%98%E5%85%88%E7%BA%A7.md)-2022.09.21
+
 ## [算法总结](./arithmetic/index.md)
 
 [1. LeetCode热题HOT100](./arithmetic/LeetCode%E7%83%AD%E9%A2%98HOT100/index.md)
