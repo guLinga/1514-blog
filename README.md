@@ -17,6 +17,8 @@
 
 ## [算法总结](./arithmetic/index.md)
 
+[1. LeetCode热题HOT100](./arithmetic/index.md)
+
 ## [刷题总结](./exercise/index.md)
 
 [1. JavaScript](./exercise/JavaScript/index.md)
