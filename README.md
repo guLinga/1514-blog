@@ -17,7 +17,7 @@
 
 ## [算法总结](./arithmetic/index.md)
 
-[1. LeetCode热题HOT100](./arithmetic/index.md)
+[1. LeetCode热题HOT100](./arithmetic/LeetCode%E7%83%AD%E9%A2%98HOT100/index.md)
 
 ## [刷题总结](./exercise/index.md)
 
