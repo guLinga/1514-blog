@@ -6,3 +6,6 @@
 [golbalThis]
 
 [bind,apply,call]
+
+[代理]
+
