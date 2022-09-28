@@ -17,6 +17,8 @@
 
 [8. css优先级计算规则](./technology/css%E4%BC%98%E5%85%88%E7%BA%A7.md)-2022.09.21
 
+[9. js深拷贝和浅拷贝](./technology/js%E6%8B%B7%E8%B4%9D.md)-2022.9.28
+
 ## [算法总结](./arithmetic/index.md)
 
 [1. LeetCode热题HOT100](./arithmetic/LeetCode%E7%83%AD%E9%A2%98HOT100/index.md)
