@@ -1,6 +1,3 @@
-[<=返回](./index.md)
-<hr/>
-
 [React Hooks简单用法了解](#1)
 + [hooks数据更新驱动](#2)
   - [useState](#3)

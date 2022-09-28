@@ -1,6 +1,3 @@
-[<=返回](./index.md)
-<hr/>
-
 [Redux、Redux Toolkit](#1)
   + [Redux](#2)
     - [Redux的介绍](#3)
