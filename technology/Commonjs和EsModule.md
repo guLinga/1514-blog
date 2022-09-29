@@ -1,6 +1,27 @@
+[Commonjs和EsModule](#1)
+  - [Commonjs](#2)
+    + [Commonjs实现原理-包装函数的本质](#3)
+    + [require文件加载流程](#4)
+    + [require引入处理](#5)
+    + [require的动态加载](#6)
+    + [exports和module.exports](#7)
+      - [exports](#8)
+      - [module.exports](#9)
+  - [ES Module](#10)
+    + [export和import](#11)
+  - [总结](#12)
+    + [Commonjs](#13)
+    + [ES Module](#14)
+
+<p id=1></p>
+
 # Commonjs和EsModule
 
+<p id=2></p>
+
 ## Commonjs
+
+<p id=3></p>
 
 ### Commonjs实现原理-包装函数的本质
 在编译的过程中，实际 Commonjs 对 js 的代码块进行了首尾包装，其本质是：
@@ -11,6 +32,8 @@ function wrapper (script) {
      '\n})'
 }
 ```
+
+<p id=4></p>
 
 ### require文件加载流程
 ```js
@@ -43,10 +66,14 @@ subgraph g4
 end
 ```
 
+<p id=5></p>
+
 ### require引入处理
 1. 引入顺序：Commonjs`同步`加载并执行模块文件，采用深度优先遍历，执行顺序是`父->子->父`。
 2. 加载原理：Node中，每一个js文件都是一个nodule，module上保存了exports等信息，还保存了loaded来表示该模块是否被加载，如果被加载则说明该模块在`Module`中缓存，直接读取。如果没加入缓存则加入缓存，然后执行文件。`这样就避免了循环引用和重复加载`。
 3. 我们要注意的是，Commonjs是同步加载的，并且执行顺序是`父->子->父`，所以在`子`中引入`父`可能得不到数据。我们可以将其放入异步加载中`(例：setTimeout)`或动态加载。
+
+<p id=6></p>
 
 ### require的动态加载
 动态加载是require的一个特性，require可以在任意的上下文动态加载模块，这正是区别于`Es Module`的地方。
@@ -57,7 +84,12 @@ exports.say = function(){
 }
 ```
 
+<p id=7></p>
+
 ### exports和module.exports
+
+<p id=8></p>
+
 #### exports
 正确写法
 ```js
@@ -69,6 +101,9 @@ const a = require('./a')//引入
 export = { name:'names' };//导出
 const a = require('./a')//引入
 ```
+
+<p id=9></p>
+
 #### module.exports
 ```js
 module.exports = { name:'name' }//导出
@@ -77,7 +112,11 @@ module.exports =
 ```
 **注意，export和module.exports不要混合使用，会出现覆盖的情况。**
 
+<p id=10></p>
+
 ## ES Module
+
+<p id=11></p>
 
 ### export和import
 1. 混合导入导出
@@ -118,4 +157,24 @@ import 'module'
 const msg = import('module');
 ```
 
+<p id=12></p>
 
+## 总结
+
+<p id=13></p>
+
+### Commonjs
+1. 模块由 JS 运行时实现。
+2. 是单个值导出，本质上导出的就是 exports 属性。
+3. 是可以动态加载的，对每一个加载都存在缓存，可以有效的解决循环引用问题。
+4. 模块同步加载并执行模块文件。
+
+<p id=14></p>
+
+### ES Module
+1. ES6 Module 静态的，不能放在块级作用域内，代码发生在编译时。
+2. ES6 Module 的值是动态绑定的，可以通过导出方法修改，可以直接访问修改结果。
+3. ES6 Module 可以导出多个属性和方法，可以单个导入导出，混合导入导出。
+4. ES6 模块提前加载并执行模块文件，
+5. ES6 Module 导入模块在严格模式下。
+6. ES6 Module 的特性可以很容易实现 Tree Shaking 和 Code Splitting。
