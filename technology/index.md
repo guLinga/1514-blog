@@ -14,6 +14,14 @@
 
 [8. css优先级计算规则](./css%E4%BC%98%E5%85%88%E7%BA%A7.md)-2022.09.21
 
-[9. js深拷贝和浅拷贝](./js%E6%8B%B7%E8%B4%9D.md)-2022.9.28
+[9. js深拷贝和浅拷贝](./js%E6%8B%B7%E8%B4%9D.md)-2022.09.28
 
-[10. Commonjs和EsModule](./Commonjs%E5%92%8CEsModule.md)-2022.9.29
+[10. Commonjs和EsModule](./Commonjs%E5%92%8CEsModule.md)-2022.09.29
+
+[11. 手写instanceof](./%E6%89%8B%E5%86%99instanceof.md)-2022.09.29
+
+[12. 手写call](./%E6%89%8B%E5%86%99call.md)-2022.09.29
+
+[13. 手写apply](./%E6%89%8B%E5%86%99apply.md)-2022.09.29
+
+[14. 手写bind](./%E6%89%8B%E5%86%99bind.md)-2022.09.29
