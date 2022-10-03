@@ -6,9 +6,13 @@
       - [Demo2](#6)
   - [参考资料](#7)
 
-## diff算法 {#1}
+<p id=1></p>
 
-### 单节点{#2}
+## diff算法
+
+<p id=2></p>
+
+### 单节点
 
 ```mermaid
 graph TB;
@@ -19,7 +23,9 @@ Dom节点是否可以复用--否-->标记DOM需要被删除
 上次更新时的Fiber节点是否存在对应DOM节点--否-->新生成一个Fiber节点并返回
 ```
 
-### 多节点{#3}
+<p id=3></p>
+
+### 多节点
 
 Diff算法可以是以下的设计思路：
 1. 判断当前节点的更新属于哪种情况
@@ -59,8 +65,13 @@ end
 第一轮遍历结束-->第二轮遍历开始
 ```
 
-#### 多节点newChildren与oldFiber都没遍历完{#4}
-##### Demo1{#5}
+<p id=4></p>
+
+#### 多节点newChildren与oldFiber都没遍历完
+
+<p id=5></p>
+
+##### Demo1
 ```js
 
 // 之前
@@ -131,7 +142,9 @@ oldIndex 1 < lastPlacedIndex 3 // 之前节点为 abcd，所以b.index === 1
 最终acd 3个节点都没有移动，b节点被标记为移动
 ```
 
-##### Demo2{#6}
+<p id=6></p>
+
+##### Demo2
 ```js
 // 之前
 abcd
@@ -202,5 +215,7 @@ oldIndex 2 < lastPlacedIndex 3
 ===第二轮遍历结束===
 ```
 
-### 参考资料{#7}
+<p id=7></p>
+
+### 参考资料
 [1][React技术揭秘](https://react.iamkasong.com/)
