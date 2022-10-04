@@ -29,6 +29,12 @@
 
 [14. 手写bind](./technology/%E6%89%8B%E5%86%99bind.md)-2022.09.29
 
+### [Array](./technology/Array/index.md)
+
+[1. 数组创建](./technology/Array/created%20array.md)-2022.10.04
+
+[2. 数组遍历](./technology/Array/created%20array.md)-2022.10.04
+
 ## [算法总结](./arithmetic/index.md)
 
 [1. LeetCode热题HOT100](./arithmetic/LeetCode%E7%83%AD%E9%A2%98HOT100/index.md)
