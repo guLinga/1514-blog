@@ -33,7 +33,7 @@
 
 [1. 数组创建](./technology/Array/created%20array.md)-2022.10.04
 
-[2. 数组遍历](./technology/Array/created%20array.md)-2022.10.04
+[2. 数组遍历](./technology/Array/traversal%20array.md)-2022.10.04
 
 ## [算法总结](./arithmetic/index.md)
 
