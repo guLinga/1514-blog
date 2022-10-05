@@ -10,8 +10,8 @@ function Nav() {
   return (
     <div>
       <Button onClick={fn}>跳转</Button>
-      <NavLink to='/login' activeStyle={{color:'red'}}>登录</NavLink>
-      <NavLink to='/reg' activeStyle={{color:'red'}}>注册</NavLink>
+      <NavLink to={{pathname:'/good/1',query:{a:1}}} activeStyle={{color:'red'}}>商品</NavLink>
+      <NavLink to={{pathname:'/good/1',search:'?a=1'}} activeStyle={{color:'red'}}>商品</NavLink>
       <Link to='/login'>登录</Link>
       <Link to='/reg'>注册</Link>
     </div>

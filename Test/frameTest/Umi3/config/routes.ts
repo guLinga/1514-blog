@@ -4,9 +4,11 @@ export default [
     component: '@/layouts/base-layouts',
     routes:[
       { path: '/login', component: '@/pages/login' },
+      { path: '/index', component: '@/pages/index' },
       { path: '/goods/:id', wrappers: ['@/wrappers/auth'], component: '@/pages/goods' },
       { path: '/good/:id', component: '@/pages/goods' },
-      { 
+      { path: '/dva', component: '@/pages/dva' },
+      {
         path: '/reg',
         component: '@/pages/reg'
       },

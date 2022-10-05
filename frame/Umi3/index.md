@@ -174,3 +174,155 @@ history---C[useHistory]
 1. 编程式跳转
 
 2. 声明式跳转
+
+### mock
+```js
+export default {
+  'GET /umi/good':[
+    { id:1,name:'name1' },
+    { id:2,name:'name2' }
+  ],
+  'POST /api/users/create': (req,res)=>{
+    res.end('OK');
+  }
+}
+```
+模拟延时
+```js
+import { delay } from 'roadhog-api-doc';//模拟延时
+
+export default delay({
+  'GET /umi/good':[
+    { id:1,name:'name1' },
+    { id:2,name:'name2' }
+  ],
+  'POST /api/users/create': (req,res)=>{
+    res.end('OK');
+  }
+},2000)
+```
+
+### 反向代理
+```ts
+export default {
+  '/api':{
+    target: 'https://localhost:9001',//代理真实服务器
+    https:true,//从http代理到https
+    changeOrigin:true,//依赖origin的功能需要这个，比如cookie
+    pathRwrite:{'^/api':''},//替换路径
+  }
+}
+```
+
+### request
+request是umi自带的请求数据的工具。和axios的用法很像。
+```tsx
+import { request } from 'umi';
+const getGood = async () => {
+  let res = await request('/umi/good');
+  console.log(res);
+}
+const Login = async () => {
+  let res = await request('/umi/good',{
+    method: 'POST',
+    data: {
+      username: '',
+      password: ''
+    }
+  });
+  console.log(res);
+}
+```
+
+
+### useRequest
+useRequest 要求 必须返回一个data字段
+```tsx
+import { useRequest } from 'umi';
+const {data,error,loading} = useRequest('/umi/good');
+const {data2,error2,loading2} = useRequest({
+    url: '/umi/good'
+});
+```
+```tsx
+//当添加配置manual:true的时候，必须调用run函数才会执行并返回数据
+const {data,error,loading,run} = useRequest('/umi/good',{manual:true});
+```
+轮询
+```tsx
+const {data,error,loading,run} = useRequest('/umi/good',{
+    manual:true,
+    pollingInterval: 1000,//每一秒轮询一次
+    pollingWhenHidden: false,//屏幕不可见时，暂停轮询
+});
+```
+
+
+### dva
+基于redux和redux-saga的数据流解决方案。
+dva的文件在`src`下的`models`下的`global.js`文件中
+```js
+export default {
+  // namespace: 'global',//所有的models里面的namespace不能重名
+  //初始化全局数据
+  state:{
+    title: '全局title',
+    text: '全局text',
+    login: false,
+    a: '全局models aaaa'
+  },
+
+  //处理同步业务
+  reducers: {
+    setText(state){
+      //copy 更新 并返回
+      return {
+        ...state,
+        text: '全局 设置后的 text' + Math.random().toFixed(2)
+      }
+    },
+    setTitle(state,action){
+      //copy 更新 并返回
+      return {
+        ...state,
+        text: `全局 设置后的 title'/${action.payload}/${Math.random().toFixed(2)}`
+      }
+    }
+  }
+}
+```
+上面这段代码我们就定义了全局的变量和方法，我们可以通过下面的代码在页面中使用全局变量
+```tsx
+import React, {JSXElementConstructor, useEffect} from 'react';
+import {connect} from 'umi'
+interface Props{
+  dispatch:({})=>{},
+  [key:string]:string|(({})=>{})
+}
+const Dva:JSXElementConstructor<never> = (props:Props) => {
+  return (
+    <div>
+      Dva
+      <h1>获取全局数据</h1>
+      <div>text:{props.text}</div>
+      <div>title:{props.title}</div>
+      <div>A:{props.A}</div>
+      {props.isLogin?<div>已登录</div>:<div>未登录</div>}
+      <button onClick={()=>props.dispatch({
+        type: 'global/setText'
+      })}>按钮</button>
+    </div>
+  );
+};
+export default connect((state:{
+  global:{[key:string]:string}
+})=>({
+  //抓取全局，重命名
+  text: state.global.text,
+  title: state.global.title,
+  A: state.global.a,
+  isLogin: state.global.login
+}))(Dva)
+```
+我们不仅可以创建全局的数据，我们也可以创建页面级别的数据，我们只需要在组件对应的文件夹下面创建`model.ts`或`model.ts`. 如果我们要创建多个文件，则可以创建`models`文件夹，将
+

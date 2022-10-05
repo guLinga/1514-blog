@@ -1,6 +1,7 @@
 import { defineConfig } from 'umi';
 import routes from './routes';
 import theme from './theme';
+import proxy from './proxy';
 
 export default defineConfig({
   nodeModulesTransform: {
@@ -17,5 +18,6 @@ export default defineConfig({
     loading: '@/components/loading',
   },//首页分包，让开屏更快
   mountElementId:'root',
-  theme
+  theme,
+  proxy,//反向代理
 });
