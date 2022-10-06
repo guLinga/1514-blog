@@ -1,4 +1,4 @@
-## Umi3
+## [Umi3](../../Test/frameTest/Umi3/)
 
 ### 项目创建
 1. 创建脚手架
@@ -257,10 +257,34 @@ const {data,error,loading,run} = useRequest('/umi/good',{
 });
 ```
 
-
 ### dva
+
+```mermaid
+graph LR;
+URL-->RouteComponent
+RouteComponent-->dispatch
+RouteComponent-->c1组件
+RouteComponent-->c2组件
+dispatch-->Action
+Action-->Reducer,同步
+Action-->Effect,异步
+subgraph Model
+	Reducer,同步
+	Effect,异步
+	Subscription
+end
+Subscription.->Action
+Effect,异步-->Server,服务器
+Server,服务器-->Reducer,同步
+Reducer,同步-->State
+State--connect-->RouteComponent
+```
+
+![dva数据流](E:\Pale\1514-blog\image\Umi3\1.png)
+
 基于redux和redux-saga的数据流解决方案。
 dva的文件在`src`下的`models`下的`global.js`文件中
+
 ```js
 export default {
   // namespace: 'global',//所有的models里面的namespace不能重名
@@ -326,3 +350,130 @@ export default connect((state:{
 ```
 我们不仅可以创建全局的数据，我们也可以创建页面级别的数据，我们只需要在组件对应的文件夹下面创建`model.ts`或`model.ts`. 如果我们要创建多个文件，则可以创建`models`文件夹，将
 
+### 启用connect 使用hooks
+
+```tsx
+import React from 'react';
+import {useDispatch,useSelector} from 'umi'
+
+const Child = () => {
+    const dispatch = useDispatch();
+    const data = useSelector((state:{global:{
+            a:string
+            login: boolean
+            text:string
+            title:string
+        }}) => state.global);
+    return (
+        <div>
+            child
+            <div>{data.text}</div>
+            <div>{data.title}</div>
+            <button onClick={()=>{
+                dispatch({type:'global/setText'});
+                dispatch({type:'global/setTitle',payload:1});
+            }}>按钮</button>
+        </div>
+    );
+};
+
+export default Child;
+```
+
+### subscription源获取
+```tsx
+import {request} from "umi";
+import key from 'keymaster'
+
+export default {
+  // namespace: 'global',//所有的models里面的namespace不能重名
+  //初始化全局数据
+  state:{
+    title: '全局title',
+    text: '全局text',
+    login: false,
+    a: '全局models aaaa'
+  },
+
+  //处理同步业务
+  reducers: {
+    setText(state){
+      //copy 更新 并返回
+      return {
+        ...state,
+        text: '全局 设置后的 text' + Math.random().toFixed(2)
+      }
+    }
+  },
+
+  subscriptions: {
+    //监听路由
+    listenRoute({dispatch,history}){
+      history.listen(({pathname,query})=>{
+        console.log('global subscription',pathname,query)
+      })
+    },
+
+    //监听按键
+    listenKeyBoard({dispatch}){
+      key('ctrl+i',()=>{
+        console.log('你按下了ctrl+i');
+        dispatch({type:'setText'})
+      })
+    }
+  }
+}
+```
+
+### 运行时的配置
+
+#### 渲染浅的权限效验
+在`src`下创建`app.ts`文件
+```tsx
+import {history} from 'umi'
+import {ReactNode} from "react";
+
+export const render = async (oldRender: (()=>ReactNode)) => {
+  //oldRender   需要至少调用一次
+  // history.push('/login')//这里判断一下是否登录，并且是否是个人中心什么的，如果没登录则无法进入。
+  let isLogin = true
+  if(isLogin){
+    history.push('/login')
+  }
+  oldRender()
+};
+
+```
+#### 动态路由读取、添加
+在`src`下创建`app.ts`文件
+
+#### 路由监听，埋点统计
+在`src`下创建`app.ts`文件
+```tsx
+export function onRouteChange({matchedRoutes,location,routes,action}:any){
+  //添加标题
+  document.title = matchedRoutes[matchedRoutes.length-1].route.title||'heheda'
+}
+```
+#### 拦截器
+在`src`下创建`app.ts`文件
+```tsx
+export const request = {
+  // timeout: 1000,//延时
+  // errorConfig: {},//错误处理
+  // middlewares: [],//使用中间件
+  //请求拦截
+  requestInterceptors: [
+    (url:any,options:any)=>{
+      options.headers = {token:'123456'}
+      return {url,options}
+    }
+  ],
+
+  responseInterceptors: [
+    (response:any,options:any)=>{
+      return response;
+    }
+  ]
+};
+```

@@ -12,11 +12,19 @@ const Dva:JSXElementConstructor<never> = (props:Props) => {
       <div>text:{props.text}</div>
       <div>title:{props.title}</div>
       <div>A:{props.A}</div>
-      {props.isLogin?<div>已登录</div>:<div>未登录</div>}
+      {props.isLogin ? <div>已登录</div> : <div>未登录</div>}
       <div>我是组件变量：{props.test}</div>
-      <button onClick={()=>props.dispatch({
+      <button onClick={() => props.dispatch({
         type: 'global/setText'
-      })}>按钮</button>
+      })}>按钮
+      </button>
+
+      <h1>发送异步请求，登录</h1>
+      <button onClick={()=>{
+        props.dispatch({
+          type: 'global/login'
+        })
+      }}>异步登录测试</button>
     </div>
   );
 };

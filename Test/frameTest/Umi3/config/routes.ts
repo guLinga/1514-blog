@@ -8,6 +8,7 @@ export default [
       { path: '/goods/:id', wrappers: ['@/wrappers/auth'], component: '@/pages/goods' },
       { path: '/good/:id', component: '@/pages/goods' },
       { path: '/dva', component: '@/pages/dva' },
+      { path: '/dva-child', component: '@/pages/dva/child' },
       {
         path: '/reg',
         component: '@/pages/reg'

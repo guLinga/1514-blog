@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@ant-design/pro-layout": "^6.5.0",
+    "keymaster": "^1.6.2",
     "react": "17.x",
     "react-dom": "17.x",
     "roadhog-api-doc": "^1.1.2",
