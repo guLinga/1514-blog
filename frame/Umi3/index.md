@@ -1,4 +1,31 @@
+[Umi3](#1)
+  - [项目创建](#2)
+  - [项目目录](#3)
+  - [项目配置](#4)
+  - [umi3-5-antd](#5)
+  - [配置主题](#6)
+  - [图片和资源的引入](#7)
+  - [less样式模块化](#8)
+  - [路由、权限路由、动态路由](#9)
+  - [页面跳转](#10)
+  - [mock](#11)
+  - [反向代理](#12)
+  - [request](#13)
+  - [useRequest](#14)
+  - [dva](#15)
+  - [启用connect 使用hooks](#16)
+  - [subscription源获取](#17)
+  - [运行时的配置](#18)
+    + [渲染浅的权限效验](#19)
+    + [动态路由读取、添加](#20)
+    + [路由监听，埋点统计](#21)
+    + [拦截器](#22)
+
+<p id=1></p>
+
 ## [Umi3](../../Test/frameTest/Umi3/)
+
+<p id=2></p>
 
 ### 项目创建
 1. 创建脚手架
@@ -16,10 +43,16 @@ yarn
 yarn start
 ```
 
+<p id=3></p>
+
 ### 项目目录
+
+<p id=4></p>
 
 ### 项目配置
 UMI的默认配置文件是`.umirc.ts`，如果配置多的话，我们可以将`.umirc.ts`文件删除，在根目录下创建`config`文件夹，在里面配置不同的配置文件。
+
+<p id=5></p>
 
 ### umi3-5-antd
 如果我们引入antd-mobile版本是默认的v2版本。
@@ -48,6 +81,8 @@ export default function IndexPage() {
 }
 ```
 
+<p id=6></p>
+
 ### 配置主题
 antd pc端配置，只需要在配置文件里面写入：
 ```
@@ -61,6 +96,8 @@ antd v5配置，需要现在`src`下面创建`global.less`。
   --adm-color-primary:#399;
 }
 ```
+
+<p id=7></p>
 
 ### 图片和资源的引入
 在根目录创建`public`文件夹，来存放静态图片。
@@ -87,8 +124,12 @@ import user from '../assets/images/favicon.ico';
 }
 ```
 
+<p id=8></p>
+
 ### less样式模块化
 全局的less变量定义在`src`下的`global.less`里。对于全局的样式不需要引入就可以直接使用。
+
+<p id=9></p>
 
 ### 路由、权限路由、动态路由
 UMI是约定式路由和配置型路由，约定式路由就是你合理的创建文件，在不写任何配置的情况下就可以使用路由，但是当项目比较大的时候，还是使用配置型路由。
@@ -157,6 +198,8 @@ style A fill:#559dff
 style B fill:#559dff
 ```
 
+<p id=10></p>
+
 ### 页面跳转
 
 ```mermaid
@@ -174,6 +217,8 @@ history---C[useHistory]
 1. 编程式跳转
 
 2. 声明式跳转
+
+<p id=11></p>
 
 ### mock
 ```js
@@ -202,6 +247,8 @@ export default delay({
 },2000)
 ```
 
+<p id=12></p>
+
 ### 反向代理
 ```ts
 export default {
@@ -213,6 +260,8 @@ export default {
   }
 }
 ```
+
+<p id=13></p>
 
 ### request
 request是umi自带的请求数据的工具。和axios的用法很像。
@@ -234,6 +283,7 @@ const Login = async () => {
 }
 ```
 
+<p id=14></p>
 
 ### useRequest
 useRequest 要求 必须返回一个data字段
@@ -256,6 +306,8 @@ const {data,error,loading,run} = useRequest('/umi/good',{
     pollingWhenHidden: false,//屏幕不可见时，暂停轮询
 });
 ```
+
+<p id=15></p>
 
 ### dva
 
@@ -350,6 +402,8 @@ export default connect((state:{
 ```
 我们不仅可以创建全局的数据，我们也可以创建页面级别的数据，我们只需要在组件对应的文件夹下面创建`model.ts`或`model.ts`. 如果我们要创建多个文件，则可以创建`models`文件夹，将
 
+<p id=16></p>
+
 ### 启用connect 使用hooks
 
 ```tsx
@@ -379,6 +433,8 @@ const Child = () => {
 
 export default Child;
 ```
+
+<p id=17></p>
 
 ### subscription源获取
 ```tsx
@@ -425,7 +481,11 @@ export default {
 }
 ```
 
+<p id=18></p>
+
 ### 运行时的配置
+
+<p id=19></p>
 
 #### 渲染浅的权限效验
 在`src`下创建`app.ts`文件
@@ -442,10 +502,14 @@ export const render = async (oldRender: (()=>ReactNode)) => {
   }
   oldRender()
 };
-
 ```
+
+<p id=20></p>
+
 #### 动态路由读取、添加
 在`src`下创建`app.ts`文件
+
+<p id=21></p>
 
 #### 路由监听，埋点统计
 在`src`下创建`app.ts`文件
@@ -455,6 +519,9 @@ export function onRouteChange({matchedRoutes,location,routes,action}:any){
   document.title = matchedRoutes[matchedRoutes.length-1].route.title||'heheda'
 }
 ```
+
+<p id=22></p>
+
 #### 拦截器
 在`src`下创建`app.ts`文件
 ```tsx
