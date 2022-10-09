@@ -21,19 +21,21 @@
 
 [Commonjs和EsModule](./technology/Commonjs%E5%92%8CEsModule.md)-2022.09.29
 
-[手写instanceof](./technology/%E6%89%8B%E5%86%99instanceof.md)-2022.09.29
-
-[手写call](./technology/%E6%89%8B%E5%86%99call.md)-2022.09.29
-
-[手写apply](./technology/%E6%89%8B%E5%86%99apply.md)-2022.09.29
-
-[手写bind](./technology/%E6%89%8B%E5%86%99bind.md)-2022.09.29
-
 ### [Array](./technology/Array/index.md)
 
 [数组创建](./technology/Array/created%20array.md)-2022.10.04
 
 [数组遍历](./technology/Array/traversal%20array.md)-2022.10.04
+
+### [手写](./write/index.md)
+
+[手写instanceof](./write/%E6%89%8B%E5%86%99instanceof.md)-2022.09.29
+
+[手写call](./write/%E6%89%8B%E5%86%99call.md)-2022.09.29
+
+[手写apply](./write/%E6%89%8B%E5%86%99apply.md)-2022.09.29
+
+[手写bind](./write/%E6%89%8B%E5%86%99bind.md)-2022.09.29
 
 ## [算法总结](./arithmetic/index.md)
 
