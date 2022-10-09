@@ -274,3 +274,4 @@ export default plugin =  {
 ```
 plugin 是单个转换功能的实现，当 plugin 比较多或者 plugin 的 options 比较多的时候就会导致使用成本升高。这时候可以封装成一个 preset，用户可以通过 preset 来批量引入 plugin 并进行一些配置。preset 就是对 babel 配置的一层封装。
 
+### [自动埋点](../../Test/frameTest/Babel/exercize-auto-track)
