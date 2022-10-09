@@ -1,1 +1,1 @@
-[1. JavaScript](./JavaScript/index.md)
+[JavaScript](./JavaScript/index.md)

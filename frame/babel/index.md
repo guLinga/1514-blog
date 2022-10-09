@@ -188,4 +188,89 @@ const {code, map} = generate(ast);
 console.log(code);
 ```
 
+### JS Parser的历史
+
+### tarverse的path、scope、visitor
+关于transform的流程，babel会递归遍历AST，在遍历过程中使用不同的visitor函数来实现transform，这种设计模式叫做访问者模式。
+```js
+path {
+    // 属性：
+   path.node //当前 AST 节点
+   path.parent //父 AST 节点
+   path.parentPath //父 AST 节点的 path
+   path.scope //作用域
+   path.hub //可以通过 path.hub.file 拿到最外层 File 对象， path.hub.getScope 拿到最外层作用域，path.hub.getCode 拿到源码字符串
+   path.container //当前 AST 节点所在的父节点属性的属性值
+   path.key //当前 AST 节点所在父节点属性的属性名或所在数组的下标
+   path.listkey //当前 AST 节点所在父节点属性的属性值为数组时 listkey 为该属性名，否则为 undefined
+    
+    // 方法
+   get(key) //获取某个属性的 path
+   set(key, node) //设置某个属性的值
+   getSibling(key) //获取某个下标的兄弟节点
+   getNextSibling() //获取下一个兄弟节点
+   getPrevSibling() //获取上一个兄弟节点
+   getAllPrevSiblings() //获取之前的所有兄弟节点
+   getAllNextSiblings() //获取之后的所有兄弟节点
+   find(callback) //从当前节点到根节点来查找节点（包括当前节点），调用 callback（传入 path）来决定是否终止查找
+   findParent(callback) //从当前节点到根节点来查找节点（不包括当前节点），调用 callback（传入 path）来决定是否终止查找
+   inList() //判断节点是否在数组中，如果 container 为数组，也就是有 listkey 的时候，返回 true
+   isXxx(opts) //判断当前节点是否是某个类型，可以传入属性和属性值进一步判断，比如path.isIdentifier({name: 'a'})
+   assertXxx(opts) //同 isXxx，但是不返回布尔值，而是抛出异常
+   insertBefore(nodes) //在之前插入节点，可以是单个节点或者节点数组
+   insertAfter(nodes) //在之后插入节点，可以是单个节点或者节点数组
+   replaceWith(replacement) //用某个节点替换当前节点
+   replaceWithMultiple(nodes) //用多个节点替换当前节点
+   replaceWithSourceString(replacement) //解析源码成 AST，然后替换当前节点
+   remove() //删除当前节点
+   traverse(visitor, state) //遍历当前节点的子节点，传入 visitor 和 state（state 是不同节点间传递数据的方式）
+   skip() //跳过当前节点的子节点的遍历
+   stop() //结束所有遍历
+}
+```
+### Generator和SourceMap
+generate把AST打印成字符串，对不同AST节点做不同的处理。在这个过程中抽象语法树中省略的一些分隔符重新加载回来。
+
+### Code-Frame代码高亮原理
+
+### preset
+plugin的格式
+```js
+// 返回对象的函数
+export default function(api, options, dirname) {
+   return {
+      inherits: parentPlugin,
+      manipulateOptions(options, parserOptions) {
+         options.xxx = '';
+      },
+      pre(file) {
+         this.cache = new Map();
+      },
+      visitor: {
+         StringLiteral(path, state) {
+            this.cache.set(path.node.value, 1);
+         }
+      },
+      post(file) {
+         console.log(this.cache);
+      }
+   };
+} 
+```
+```js
+export default plugin =  {
+    pre(state) {
+      this.cache = new Map();
+    },
+    visitor: {
+      StringLiteral(path, state) {
+        this.cache.set(path.node.value, 1);
+      }
+    },
+    post(state) {
+      console.log(this.cache);
+    }
+};
+```
+plugin 是单个转换功能的实现，当 plugin 比较多或者 plugin 的 options 比较多的时候就会导致使用成本升高。这时候可以封装成一个 preset，用户可以通过 preset 来批量引入 plugin 并进行一些配置。preset 就是对 babel 配置的一层封装。
 
