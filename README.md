@@ -27,7 +27,7 @@
 
 [数组遍历](./technology/Array/traversal%20array.md)-2022.10.04
 
-### [手写](./write/index.md)
+## [手写](./write/index.md)
 
 [手写instanceof](./write/%E6%89%8B%E5%86%99instanceof.md)-2022.09.29
 
