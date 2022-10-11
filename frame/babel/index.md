@@ -228,10 +228,14 @@ path {
    stop() //结束所有遍历
 }
 ```
+
+
 ### Generator和SourceMap
 generate把AST打印成字符串，对不同AST节点做不同的处理。在这个过程中抽象语法树中省略的一些分隔符重新加载回来。
 
-### Code-Frame代码高亮原理
+
+
+
 
 ### preset
 plugin的格式
@@ -274,4 +278,8 @@ export default plugin =  {
 ```
 plugin 是单个转换功能的实现，当 plugin 比较多或者 plugin 的 options 比较多的时候就会导致使用成本升高。这时候可以封装成一个 preset，用户可以通过 preset 来批量引入 plugin 并进行一些配置。preset 就是对 babel 配置的一层封装。
 
-### [自动埋点](../../Test/frameTest/Babel/exercize-auto-track)
+
+### [自动埋点](../../Test/frameTest/Babel/plugin/exercize-auto-track)
+
+
+### [Link](../../Test/frameTest/Babel/plugin/Link)

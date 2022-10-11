@@ -1,0 +1,19 @@
+{
+  "name": "babeltest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.19.3",
+    "@babel/preset-env": "^7.19.4"
+  },
+  "dependencies": {
+    "@babel/plugin-proposal-do-expressions": "^7.18.6"
+  }
+}
