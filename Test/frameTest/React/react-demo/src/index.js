@@ -1,17 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "./react";
+import ReactDOM from "./react-dom";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+//实现组件的更新
+//组件数据来源：1.父组件的数据2.自身的数据
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+class App extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {num:0};
+  }
+  handleClick=()=>{
+    this.setState({num:this.state.num+1});
+  }
+  render(){
+    return <div>
+      <h1>Hello{this.state.num}</h1>
+      <button onClick={this.handleClick}>点击加1</button>
+    </div>
+  }
+}
+
+let element = <App name="1"></App>
+console.log(element);
+
+
+ReactDOM.render(element,document.getElementById('root'));
