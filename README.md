@@ -37,6 +37,8 @@
 
 [手写bind](./write/%E6%89%8B%E5%86%99bind.md)-2022.09.29
 
+[Promise/A+](./write/PromiseA%2B.md)-2022.10.16
+
 ## [算法总结](./arithmetic/index.md)
 
 [LeetCode热题HOT100](./arithmetic/LeetCode%E7%83%AD%E9%A2%98HOT100/index.md)
