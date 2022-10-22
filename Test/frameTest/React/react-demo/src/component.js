@@ -56,6 +56,7 @@ class Component{
     this.updater = new Updater(this);
   }
   setState(partialState){
+    console.log('partialState',partialState);
     this.updater.addState(partialState);
   }
   forceUpdata(){
@@ -63,8 +64,8 @@ class Component{
     let oldVnode = this.oldReaderVnode;
     let oldDom = oldVnode.dom;
     //实现组件更新
-    console.log(oldDom.parentNode,oldVnode,newVnode);
     twoVnode(oldDom.parentNode,oldVnode,newVnode)//1.旧的真实节点2.旧的虚拟DOM3.新的虚拟DOM
+    this.oldReaderVnode = newVnode;
   }
 }
 

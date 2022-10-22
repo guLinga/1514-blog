@@ -83,7 +83,7 @@ function updataProps(dom,oldProps,newProps){
           dom.style[arr] = styleObjext[arr];
         }
       }else if(key.startsWith('on')){//事件
-        dom[key.toLocaleLowerCase] = newProps[key];
+        dom[key.toLocaleLowerCase()] = newProps[key];
       }else{//其他属性
         dom[key] = newProps[key];
       }
@@ -104,7 +104,7 @@ function updataProps(dom,oldProps,newProps){
 export function twoVnode(partentDom,oldVnode,newVnode){
   //获取真实DOM
   let newdom = creatDom(newVnode);
-  let olddom = creatDom(oldVnode);
+  let olddom = oldVnode.dom;
   //更新
   partentDom.replaceChild(newdom,olddom);
 }

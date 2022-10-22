@@ -6,7 +6,6 @@
 
 ```js
 function _instanceof(A, B) {
-  if ((typeof A !== 'object' && typeof A !== 'function') || A === null || B === null || (typeof B !== 'function' && typeof B !== 'object')) return false;
   let temp = B.prototype;
   let __proto__ = A.__proto__;
   while (__proto__) {

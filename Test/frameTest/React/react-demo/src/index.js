@@ -10,12 +10,13 @@ class App extends React.Component{
     this.state = {num:0};
   }
   handleClick=()=>{
+    console.log(111);
     this.setState({num:this.state.num+1});
   }
   render(){
     return <div>
-      <h1>Hello{this.state.num}</h1>
-      <button onClick={this.handleClick}>点击加1</button>
+      <h1 className='a' click="1">Hello{this.state.num}</h1>
+      <button className='a' onClick={this.handleClick}>点击加1</button>
     </div>
   }
 }
