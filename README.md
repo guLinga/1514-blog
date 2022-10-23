@@ -45,7 +45,10 @@
 
 ## [刷题总结](./exercise/index.md)
 
-[1. JavaScript](./exercise/JavaScript/index.md)
+[JavaScript](./exercise/JavaScript/index.md)
+
+## TypeScript体操
+[匹配模式做提取](./typeScript/%E5%8C%B9%E9%85%8D%E6%A8%A1%E5%BC%8F%E5%81%9A%E6%8F%90%E5%8F%96.md)-2022.10.23
 
 ## [框架](./frame/index.md)
 [React](./frame/React/index.md)
