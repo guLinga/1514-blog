@@ -47,7 +47,7 @@
 
 [JavaScript](./exercise/JavaScript/index.md)
 
-## TypeScript体操
+## [TypeScript体操](./typeScript/index.md)
 
 [套路一、匹配模式做提取](./typeScript/%E5%A5%97%E8%B7%AF%E4%B8%80%E3%80%81%E5%8C%B9%E9%85%8D%E6%A8%A1%E5%BC%8F%E5%81%9A%E6%8F%90%E5%8F%96.md)-2022.10.23
 
@@ -60,6 +60,10 @@
 [套路五、联合分散可化简](./typeScript/%E5%A5%97%E8%B7%AF%E4%BA%94%E3%80%81%E8%81%94%E5%90%88%E5%88%86%E6%95%A3%E5%8F%AF%E5%8C%96%E7%AE%80.md)-2022.10.24
 
 [套路六、特殊类型要记清](./typeScript/%E5%A5%97%E8%B7%AF%E5%85%AD%E3%80%81%E7%89%B9%E6%AE%8A%E7%B1%BB%E5%9E%8B%E8%A6%81%E8%AE%B0%E6%B8%85.md)-2022.10.24
+
+[内置高级类型](./typeScript/%E5%86%85%E7%BD%AE%E9%AB%98%E7%BA%A7%E7%B1%BB%E5%9E%8B.md)-2022.10.24
+
+[typescript学习笔记](./typeScript/typescript%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93.md)-2022.07.03
 
 ## [框架](./frame/index.md)
 [React](./frame/React/index.md)
