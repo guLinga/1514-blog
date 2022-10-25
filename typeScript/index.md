@@ -12,4 +12,6 @@
 
 [内置高级类型](./%E5%86%85%E7%BD%AE%E9%AB%98%E7%BA%A7%E7%B1%BB%E5%9E%8B.md)
 
+[一些特殊情况的说明](./%E4%B8%80%E4%BA%9B%E7%89%B9%E6%AE%8A%E6%83%85%E5%86%B5%E7%9A%84%E8%AF%B4%E6%98%8E.md)
+
 [typescript学习笔记](./typescript%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93.md)
