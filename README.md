@@ -48,7 +48,18 @@
 [JavaScript](./exercise/JavaScript/index.md)
 
 ## TypeScript体操
-[匹配模式做提取](./typeScript/%E5%8C%B9%E9%85%8D%E6%A8%A1%E5%BC%8F%E5%81%9A%E6%8F%90%E5%8F%96.md)-2022.10.23
+
+[套路一、匹配模式做提取](./typeScript/%E5%A5%97%E8%B7%AF%E4%B8%80%E3%80%81%E5%8C%B9%E9%85%8D%E6%A8%A1%E5%BC%8F%E5%81%9A%E6%8F%90%E5%8F%96.md)-2022.10.23
+
+[套路二、重新构造做变换](./typeScript/%E5%A5%97%E8%B7%AF%E4%BA%8C%E3%80%81%E9%87%8D%E6%96%B0%E6%9E%84%E9%80%A0%E5%81%9A%E5%8F%98%E6%8D%A2.md)-2022.10.24
+
+[套路三、递归复用做循环](./typeScript/%E5%A5%97%E8%B7%AF%E4%B8%89%E3%80%81%E9%80%92%E5%BD%92%E5%A4%8D%E7%94%A8%E5%81%9A%E5%BE%AA%E7%8E%AF.md)-2022.10.24
+
+[套路四、数组长度做计算](./typeScript/%E5%A5%97%E8%B7%AF%E5%9B%9B%E3%80%81%E6%95%B0%E7%BB%84%E9%95%BF%E5%BA%A6%E5%81%9A%E8%AE%A1%E7%AE%97.md)-2022.10.24
+
+[套路五、联合分散可化简](./typeScript/%E5%A5%97%E8%B7%AF%E4%BA%94%E3%80%81%E8%81%94%E5%90%88%E5%88%86%E6%95%A3%E5%8F%AF%E5%8C%96%E7%AE%80.md)-2022.10.24
+
+[套路六、特殊类型要记清](./typeScript/%E5%A5%97%E8%B7%AF%E5%85%AD%E3%80%81%E7%89%B9%E6%AE%8A%E7%B1%BB%E5%9E%8B%E8%A6%81%E8%AE%B0%E6%B8%85.md)-2022.10.24
 
 ## [框架](./frame/index.md)
 [React](./frame/React/index.md)
