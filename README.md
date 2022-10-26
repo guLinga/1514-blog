@@ -105,4 +105,25 @@
 
 [任务](./task.md)
 
-[面试之道](./interview/index.md)
+[面试]
+  - [浏览器基础]
+
+    - [储存](./interview/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9F%BA%E7%A1%80/%E5%82%A8%E5%AD%98.md)-2022.10.22
+
+    - [跨域](./interview/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9F%BA%E7%A1%80/%E8%B7%A8%E5%9F%9F.md)-2022.10.22
+
+    - [事件代理](./interview/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9F%BA%E7%A1%80/%E4%BA%8B%E4%BB%B6%E4%BB%A3%E7%90%86.md)-2022.10.22
+
+    - [事件机制](./interview/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9F%BA%E7%A1%80/%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6.md)-2022.10.22
+  - [js基础]
+
+    - [0.1+0.2!=0.3](./interview/js%E5%9F%BA%E7%A1%80/0.1%2B0.2!%3D0.3.md)-2022.10.22
+
+    - [类型判断](./interview/js%E5%9F%BA%E7%A1%80/%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD.md)-2022.10.22
+
+    - [js大数](./interview/js%E5%9F%BA%E7%A1%80/js%E5%A4%A7%E6%95%B0.md)-2022.10.22
+
+    - [js类型](./interview/js%E5%9F%BA%E7%A1%80/js%E7%B1%BB%E5%9E%8B.md)
+
+    - [this](./interview/js%E5%9F%BA%E7%A1%80/this.md)-2022.10.22
+      
