@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>三栏布局</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    .a{
+      width: 100%;
+      height: 200px;
+      position: relative;
+      background-color: antiquewhite;
+    }
+    .a .left{
+      width: 100px;
+      height: 100%;
+      position: absolute;
+      background-color: red;
+    }
+    .a .center{
+      height: 100%;
+      margin-left: 100px;
+      margin-right: 200px;
+      background-color: yellow;
+    }
+    .a .right{
+      width: 200px;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      background-color: blue;
+    }
+
+    .b{
+      width: 100%;
+      height: 200px;
+      display: flex;
+      background-color: antiquewhite;
+    }
+    .b .left{
+      width: 100px;
+      height: 100%;
+      background-color: red;
+    }
+    .b .center{
+      height: 100%;
+      flex: 1;
+      background-color: yellow;
+    }
+    .b .right{
+      width: 200px;
+      height: 100%;
+      background-color: blue;
+    }
+
+    .c{
+      width: 100%;
+      height: 200px;
+      background-color: antiquewhite;
+    }
+    .c .left{
+      width: 100px;
+      height: 100%;
+      float: left;
+      background-color: red;
+    }
+    .c .center{
+      height: 100%;
+      margin-left: 100px;
+      margin-right: 200px;
+      background-color: yellow;
+    }
+    .c .right{
+      width: 200px;
+      height: 100%;
+      float: right;
+      background-color: blue;
+    }
+
+    .d{
+      width: auto;
+      height: 200px;
+      padding-left: 100px;
+      padding-right: 200px;
+      background-color: antiquewhite;
+    }
+    .d .left{
+      width: 100px;
+      height: 100%;
+
+      position: relative;
+      left: -100px;
+
+      float: left;
+      margin-left: -100%;
+
+      background-color: red;
+    }
+    .d .center{
+      height: 100%;
+      float: left;
+      width: 100%;
+      background-color: yellow;
+    }
+    .d .right{
+      width: 200px;
+      height: 100%;
+
+      position: relative;
+      right: -200px;
+
+      float: right;
+      margin-left: -100%;
+
+      background-color: blue;
+    }
+
+    .e{
+      height: 200px;
+      background-color: antiquewhite;
+    }
+    .e .left{
+      width: 100px;
+      height: 100%;
+
+      float: left;
+      margin-left: -100%;
+
+      background-color: red;
+    }
+    .e .main{
+      width: 100%;
+      height: 100%;
+      float: left;
+    }
+    .e .center{
+      height: 100%;
+      margin-left: 100px;
+      margin-right: 200px;
+      background-color: yellow;
+    }
+    .e .right{
+      width: 200px;
+      height: 100%;
+
+      float: left;
+      margin-left: -200px;
+
+      background-color: blue;
+    }
+  </style>
+</head>
+<body>
+  <!-- 三栏布局 -->
+  <div class="a">
+    <div class="left">1</div>
+    <div class="center">2</div>
+    <div class="right">3</div>
+  </div>
+  <!-- 三栏布局 -->
+  <div class="b">
+    <div class="left">1</div>
+    <div class="center">2</div>
+    <div class="right">3</div>
+  </div>
+  <!-- 三栏布局 -->
+  <div class="c">
+    <div class="left">1</div>
+    <div class="right">3</div>
+    <div class="center">2</div><!-- 注意这里，center必须放到最后面 -->
+  </div>
+  <!-- 圣杯布局 -->
+  <div class="d">
+    <div class="center">2</div>
+    <div class="left">1</div>
+    <div class="right">3</div>
+  </div>
+  <!-- 双飞翼布局 -->
+  <div class="e">
+    <div class="main">
+      <div class="center">3</div>
+    </div>
+    <div class="left">1</div>
+    <div class="right">2</div>
+  </div>
+</body>
+</html>

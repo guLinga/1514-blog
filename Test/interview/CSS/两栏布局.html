@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>两栏布局</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    .a{
+      width: 100%;
+      height: 200px;
+      background-color: antiquewhite;
+    }
+    .a .left{
+      width: 200px;
+      height: 100%;
+      background-color: aqua;
+      float: left;
+    }
+    .a .right{
+      width: auto;
+      height: 100%;
+      margin-left: 200px;
+      background-color: red;
+    }
+
+    .b{
+      width: 100%;
+      height: 200px;
+      background-color: antiquewhite;
+    }
+    .b .left{
+      width: 200px;
+      height: 100%;
+      float: left;
+      background-color: aqua;
+    }
+    .b .right{
+      height: 100%;
+      width: auto;
+      overflow: hidden;
+      background-color: red;
+    }
+
+    .c{
+      width: 100%;
+      height: 200px;
+      display: flex;
+    }
+    .c .left{
+      width: 200px;
+      height: 100%;
+      background-color: aqua;
+    }
+    .c .right{
+      width: 200px;
+      height: 100%;
+      flex: 1;
+      background-color: red;
+    }
+
+    .d{
+      width: 100%;
+      height: 200px;
+      position: relative;
+      background-color: antiquewhite;
+    }
+    .d .left{
+      width: 200px;
+      height: 100%;
+      position: absolute;
+      background-color: aqua;
+    }
+    .d .right{
+      width: auto;
+      height: 100%;
+      margin-left: 200px;
+      background-color: red;
+    }
+
+    .e{
+      width: 100%;
+      height: 200px;
+      position: relative;
+      background-color: antiquewhite;
+    }
+    .e .left{
+      width: 200px;
+      height: 100%;
+      background-color: aqua;
+    }
+    .e .right{
+      width: auto;
+      height: 100%;
+      position: absolute;
+      left: 200px;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <!-- 两栏布局 -->
+  <div class="a">
+    <div class="left">1</div>
+    <div class="right">2</div>
+  </div>
+  <!-- 两栏布局 -->
+  <div class="b">
+    <div class="left">1</div>
+    <div class="right">2</div>
+  </div>
+  <!-- 两栏布局 -->
+  <div class="c">
+    <div class="left">1</div>
+    <div class="right">2</div>
+  </div>
+  <!-- 两栏布局 -->
+  <div class="d">
+    <div class="left">1</div>
+    <div class="right">2</div>
+  </div>
+  <!-- 两栏布局 -->
+  <div class="e">
+    <div class="left">1</div>
+    <div class="right">2</div>
+  </div>
+</body>
+</html>
