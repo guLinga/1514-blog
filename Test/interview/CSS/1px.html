@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta id="metaEl" name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1px</title>
+  <style>
+    div{
+      width: 100px;
+      height: 1px;
+      background-color: black;
+    }
+  </style>
+</head>
+<body>
+  <div></div>
+  <script>
+    const scale = 1 / window.devicePixelRatio;
+    const metaEl = document.getElementById('metaEl');
+    metaEl.setAttribute('content',`width=device-width,initial-scale=${scale},maximum-scale=${scale},minimum-scale=${scale}`)
+  </script>
+</body>
+</html>
