@@ -6,6 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>水平垂直居中</title>
   <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+
     .father{
       width: 100%;
       height: 500px;
@@ -21,11 +26,50 @@
       left: 50%;
       transform: translate(-50%,-50%);
     }
+
+    .father2{
+      width: 100%;
+      height: 500px;
+      background-color: antiquewhite;
+      position: relative;
+    }
+    .son2{
+      width: 100px;
+      height: 100px;
+      background-color: aquamarine;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -50px;
+      margin-left: -50px;
+    }
+
+    .father3{
+      width: 100%;
+      height: 500px;
+      background-color: antiquewhite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .son3{
+      width: 100px;
+      height: 100px;
+      background-color: aquamarine;
+    }
   </style>
 </head>
 <body>
   <div class="father">
     <div class="son"></div>
+  </div>
+
+  <div class="father2">
+    <div class="son2"></div>
+  </div>
+
+  <div class="father3">
+    <div class="son3"></div>
   </div>
 </body>
 </html>
