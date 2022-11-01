@@ -204,6 +204,10 @@ const canTraverse = {
 //判断target是否是数组、对象、函数
 const isObject = (target)=>target!==null&&(typeof target==='object'||typeof target==='function');
 
+const handleRegExp = (target) => {
+  const { source, flags } = target
+  return new target.constructor(source, flags)
+}
 
 const handleFunc = (func) => {
   // 箭头函数直接返回自身
