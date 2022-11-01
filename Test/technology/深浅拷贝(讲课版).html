@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 引入lodash -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.js"></script>
+</head>
+
+<body>
+  <script>
+    const sym = Symbol('sym');
+    let obj = {
+      name: 'names',
+      age: 18,
+      un: undefined,
+      nu: null,
+      fn: () => {
+        console.log('fn');
+      },
+      [sym]: 'sym',
+      obj: {
+        age: 18
+      }
+    }
+
+    let obj2 = obj;
+    let obj3 = _.cloneDeep(obj);
+
+    obj.obj.age = 19;
+
+    console.log('obj', obj, 'obj2', obj2, 'obj3', obj3);
+  </script>
+</body>
+
+</html>
